@@ -1,0 +1,26 @@
+# Local operating-system and editor files
+.DS_Store
+Thumbs.db
+Desktop.ini
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Local dependencies and generated files
+node_modules/
+__pycache__/
+*.pyc
+*.log
+/lib/
+/cg-course-runtime/
+
+# Original recording exceeds GitHub's regular per-file upload limit
+/screenshots/project-t4g7-5.mp4

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Wagon Rush</title>
+    <!-- Favicon nulo para evitar pedidos desnecessários -->
+    <link rel="icon" href="data:,">
+
+    <!-- Fontes do Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rye&family=Roboto+Slab:wght@400;700&family=Special+Elite&display=swap" rel="stylesheet">
+
+    <!-- Folha de estilo externa para o HUD e menus -->
+    <link rel="stylesheet" href="styles/hud.css">
+</head>
+
+<body>
+
+    <!-- ── Menu de Início ────────────────────────────────────────────────── -->
+    <section id="start-menu" class="start-menu" aria-label="Start Menu">
+        <div class="start-card">
+            <div class="start-header">
+                <div>
+                    <h1 class="start-title">Wagon Rush</h1>
+                </div>
+                <!-- Estado do carregamento assíncrono do mapa -->
+                <div id="start-status" class="start-status">
+                    <span class="start-loader" aria-hidden="true"></span>
+                    <span id="start-status-text">Preparing the trail</span>
+                </div>
+            </div>
+            <div class="start-body">
+                <p class="start-copy">
+                    Keep the wagon running as long as possible. Look for hay bales across the fields,
+                    load them into the wagon and return to the barn to recover HP.
+                </p>
+                <!-- Instruções de controlo do teclado -->
+                <div class="start-controls" aria-label="Controls">
+                    <div class="start-control">
+                        <span class="start-key">W</span>
+                        <span>Accelerate</span>
+                    </div>
+                    <div class="start-control">
+                        <span class="start-key">S</span>
+                        <span>Brake</span>
+                    </div>
+                    <div class="start-control">
+                        <span class="start-key">A / D</span>
+                        <span>Steer the wagon</span>
+                    </div>
+                    <div class="start-control">
+                        <span class="start-key">P</span>
+                        <span>Pick up bales</span>
+                    </div>
+                    <div class="start-control">
+                        <span class="start-key">L</span>
+                        <span>Deliver bales (at the Barn)</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Botão de arranque (aparece apenas quando a cena está pronta) -->
+            <div class="start-actions">
+                <button id="start-game-button" class="hud-button" type="button" style="display: none;">Start Game</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Contagem Decrescente ──────────────────────────────────────────── -->
+    <div id="start-countdown" class="countdown" hidden>3</div>
+
+    <!-- ── HUD de Gameplay Ativo ─────────────────────────────────────────── -->
+    <section id="game-hud" class="game-hud" aria-label="Gameplay status" hidden>
+        <div class="hud-panel">
+            <div class="hud-header">
+                <div class="hud-brand">
+                    <div class="hud-title">Wagon Rush</div>
+                </div>
+                <div id="hud-status" class="hud-status">On route</div>
+            </div>
+            <div class="hud-body">
+                <!-- Barra de vida (HP) da carroça -->
+                <div class="hud-hp-row">
+                    <span class="hud-label">🐎 Wagon Health</span>
+                    <strong id="hud-hp-value" class="hud-hp-value">100</strong>
+                </div>
+                <div class="hud-hp-track">
+                    <div id="hud-hp-fill" class="hud-hp-fill"></div>
+                </div>
+                <!-- Métricas de progresso -->
+                <div class="hud-stats">
+                    <div class="hud-stat">
+                        <span>⏳ Time</span>
+                        <strong id="hud-time">0s</strong>
+                    </div>
+                    <div class="hud-stat">
+                        <span>🌾 Bales</span>
+                        <strong id="hud-cargo">0/2</strong>
+                    </div>
+                    <div class="hud-stat">
+                        <span>💨 Speed</span>
+                        <strong id="hud-speed">0.0</strong>
+                    </div>
+                    <div class="hud-stat">
+                        <span>🏆 Total</span>
+                        <strong id="hud-delivered">0</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Indicador Flutuante de Dano (Vignette e shake) ────────────────── -->
+    <div id="hud-damage-indicator" class="hud-damage-indicator"></div>
+    <div id="hud-heal-indicator" class="hud-heal-indicator"></div>
+
+    <!-- ── Prompt Contextual de Ação (Recolha/Entrega) ───────────────────── -->
+    <div id="hud-action" class="hud-action" hidden>
+        <span id="hud-action-key" class="hud-action-key">P</span>
+        <span id="hud-action-text" class="hud-action-text">Collect bale</span>
+    </div>
+
+    <!-- ── Ecrã de Fim de Jogo (Game Over) ────────────────────────────────── -->
+    <section id="hud-game-over" class="hud-game-over" hidden>
+        <div class="hud-game-over-card">
+            <div class="hud-game-over-title">Game Over</div>
+            <div class="hud-game-over-label">You survived for:</div>
+            <div id="hud-final-score" class="hud-game-over-score">0s</div>
+            <button id="hud-restart-button" class="hud-button" type="button">Try Again</button>
+        </div>
+    </section>
+
+    <!-- Ponto de entrada do script modular do jogo -->
+    <script type="module" src="main.js"></script>
+
+</body>
+
+</html>
